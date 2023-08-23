@@ -2,7 +2,6 @@ package edu.yisus.reto1.process;
 
 /**
  * @author Jesus Mendoza
- *
  * Esta calse contiene la logica de las operaciones aritmeticas
  * bascias, suma, resta, multiplicacion, division y modulo
  **/
