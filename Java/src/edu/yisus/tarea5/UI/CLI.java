@@ -8,8 +8,11 @@ public class CLI {
     public CLI() {
         this.game = null;
     }
-
-    public void startGame() {
+    /*
+    EL MODULO SIRVE PARA SIMPLEMENTE MOSTRAR EL MENÚ DE LO QUE SERÍA EL MINI VIDEOJUEGO
+    EN DONDE TAMBIÉN SALE UN MENSAJE EN DADO CASO DE NO SELLECIONAR UN NIVEL
+     */
+    public void StartGame() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("\t¡Bienvenido al juego de adivinanza de palabras!");
         while (true) {
@@ -25,13 +28,16 @@ public class CLI {
             }
             game = new GameGenerator(level);
             System.out.println("Comienza a adivinar la palabra:");
-            playGame(scanner);
+            PlayGame(scanner);
         }
         scanner.close();
     }
-
-    public void playGame(Scanner scanner) {
-        while (!game.IsGameOver()) {
+    /*
+    UN MODULO PARA QUE EL JUGADOR PUEDA VISUALIZAR LA LETRA QUE VA A PONER EL JUGADOR
+    Y SALDRÁ UN MENSAJE CUANDO NO SEA UNA LETRA O DOS LETRAS AL MIMSO TIEMPO
+     */
+    public void PlayGame(Scanner scanner) {
+        while (!game.GameOver()) {
             System.out.println("Palabra actual: " + game.GetDisplayWord());
             System.out.print("Introduce una letra: ");
             String input = scanner.nextLine();
@@ -40,18 +46,17 @@ public class CLI {
                 continue;
             }
             char guess = input.charAt(0);
-            boolean correctGuess = game.MakeGuess(guess);
+            boolean correctGuess = game.Guess(guess);
             if (correctGuess) {
                 System.out.println("¡Adivinaste una letra!");
             } else {
                 System.out.println("Esa letra no está en la palabra. Intentos restantes: " + game.remainingAttempts);
             }
         }
-        if (game.IsGameOver() && game.GetDisplayWord().equals(game.GetDisplayWord())) {
+        if (game.GameOver() && game.GetDisplayWord().equals(game.GetDisplayWord())) {
             System.out.println("¡Felicidades! Adivinaste la palabra: " + game.GetDisplayWord());
         } else {
             System.out.println("Se acabaron los intentos. La palabra era: " + game.GetDisplayWord());
         }
     }
 }
-
