@@ -33,7 +33,7 @@ public class Resultado {
     /**
      * MÉTODO ESTÁTICO QUE GENERA UN MENSAJE DESCRIPTIVO DE LA OPERACIÓN REALIZADA.
      */
-    public static String obtenerMensaje(OperacionAritmetica op, double num1, double num2) {
+    public String obtenerMensaje(OperacionAritmetica op, double num1, double num2) {
         return op.getClass().getSimpleName() + ": " + num1 + " " + op.getSimbolo() + " " + num2 + " es = " + op.operacion(num1,num2);
     }
 }
