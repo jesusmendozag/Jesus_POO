@@ -1,123 +1,74 @@
 package edu.yisus.reto10.Idiomas;
 
-import edu.yisus.reto10.operations.*;
+public class Español implements Language{
 
-import java.util.Scanner;
-
-public class Español {
-    public static void menuEspañol () {
-        /**
-         * CREA UNA INSTANCIA DE SCANNER PARA LA ENTRADA DEL USUARIO
-         */
-        Scanner scanner = new Scanner(System.in);
-
-        OperacionAritmetica operacion = null;
-        char continuar = 's';
-        double num1 = 0, num2 = 0;
-        int opcion;
-
-        /**
-         * SE AGREGA UN DO PARA QUE EL MENÚ PASE POR LO MENOS UNA VEZ, PERO EN ESTE CASO EL MENÚ ESTA EN ESPAÑOL
-         */
-        do {
-            System.out.println("\tMenú");
-            System.out.println("1.Suma");
-            System.out.println("2.Resta");
-            System.out.println("3.Multiplicación");
-            System.out.println("4.División");
-            System.out.println("5.Potencia");
-            System.out.println("6.Raíz");
-            System.out.println("7.Modulo");
-            System.out.println("8.Salir");
-
-            opcion = scanner.nextInt();
-
-            /**
-             * SE AGREGA EL SWITCH POR CADA POSIBLE RESPUESTA QUE DE EL USUSARIO
-             */
-            switch (opcion) {
-                case 1:
-                    Scanner scannerSuma = new Scanner(System.in);
-
-                    System.out.println("Ingresa el primero operando:");
-                    num1 = scannerSuma.nextDouble();
-                    System.out.println("Ingrese el segundo operando:");
-                    num2 = scannerSuma.nextDouble();
-
-                    operacion = new Suma();
-                    break;
-                case 2:
-                    Scanner scannerResta = new Scanner(System.in);
-
-                    System.out.println("Ingresa el primero operando:");
-                    num1 = scannerResta.nextDouble();
-                    System.out.println("Ingrese el segundo operando:");
-                    num2 = scannerResta.nextDouble();
-
-                    operacion = new Resta();
-                    break;
-                case 3:
-                    Scanner scannerMultiplicacion = new Scanner(System.in);
-
-                    System.out.println("Ingresa el primero multiplo:");
-                    num1 = scannerMultiplicacion.nextDouble();
-                    System.out.println("Ingrese el segundo multiplo:");
-                    num2 = scannerMultiplicacion.nextDouble();
-
-                    operacion = new Multiplicacion();
-                    break;
-                case 4:
-                    Scanner scannerDivision = new Scanner(System.in);
-
-                    System.out.println("Ingresa el dividendo:");
-                    num1 = scannerDivision.nextDouble();
-                    System.out.println("Ingrese el divisor:");
-                    num2 = scannerDivision.nextDouble();
-
-                    operacion = new Division();
-                    break;
-                case 5:
-                    Scanner scannerPotencia = new Scanner(System.in);
-
-                    System.out.println("Ingresa el operando base:");
-                    num1 = scannerPotencia.nextDouble();
-                    System.out.println("Ingrese el exponente:");
-                    num2 = scannerPotencia.nextDouble();
-
-                    operacion = new Potencia();
-                    break;
-                case 6:
-                    Scanner scannerRaiz = new Scanner(System.in);
-
-                    System.out.println("Ingresa el operador:");
-                    num1 = scannerRaiz.nextDouble();
-
-                    operacion = new RaizCuadrada();
-                    break;
-                case 7:
-                    Scanner scannerModulo = new Scanner(System.in);
-
-                    System.out.println("Ingresa el operador:");
-                    num1 = scannerModulo.nextDouble();
-
-                    operacion = new Modulo();
-                    break;
-                case 8:
-                    return;
-            }
-
-            Resultado resultado = new Resultado(operacion, num1, num2);
-
-            /**
-             * AQUÍ SIMPLEMENTE MANDAMOS A LLAMAR EL RESULTADO DE LAS OPERACIONES Y LE AGREGAMOS UNA OPCIÓN POR SI EL USUSARIO QUIERE SEGUIR
-             * UTILIZANDO EL PROGRAMA
-             */
-            System.out.println(resultado.getOperacion());
-            System.out.println("Resultado: " + resultado.getResultado());
-            System.out.println("¿Desea realizar otra operación? (s/n): ");
-            continuar = scanner.next().charAt(0);
-
-        }while (continuar == 's' || continuar == 'n');
-        scanner.close();
+    @Override
+    public String getMessage(String key) {
+        switch (key) {
+            case "welcome":
+                return "\t¡Bienvenido a la calculadora!";
+            case "choice_option":
+                return "Selecciona una de las anteriores opciones";
+            case "menu":
+                return "Menú\n1. Suma\n2. Resta\n3. Multiplicación\n4. División\n5. Potencia\n6. Raiz Cuadrada\n7. Logaritmo\n8. Modulo\n9. Salir";
+            case "invalid_option":
+                return "Opción invalida. Por favor, vuelva a intentarlo";
+            case "enter_first_operand":
+                return "Ingrese el primer operando: ";
+            case "enter_second_operand":
+                return "Ingrese el segundo operando: ";
+            case "enter_first_multiple":
+                return "Ingrese el primer múltiplo: ";
+            case "enter_second_multiple":
+                return "Ingrese el segundo múltiplo: ";
+            case "enter_dividend":
+                return "Ingresa el dividendo: ";
+            case "enter_divisor":
+                return "Ingresa el divisor: ";
+            case "enter_base":
+                return "Ingresa la base: ";
+            case "enter_exponent":
+                return "Ingresa el exponente: ";
+            case "enter_index":
+                return "Ingresa el índice de la raiz: ";
+            case "enter_filing":
+                return "Ingresa el radicando de la raiz: ";
+            case "enter_logarithmBase":
+                return "Ingrese la base del logaritmo: ";
+            case "enter_argument":
+                return "Ingrese el argumento: ";
+            case "enter_moduloDividend":
+                return "Ingresa el dividendo para el módulo: ";
+            case "enter_moduloDivisor":
+                return "Ingresa el divisor para el módulo: ";
+            case "exit_menu":
+                return "Gracias por utilizar la calculadora\n¡Tenga un buen día!";
+            case "continue":
+                return "¿Desea hacer otra operación? (y/n)";
+            case "description_operation":
+                return "Operación: ";
+            case "is":
+                return " es ";
+            case "Adding":
+                return "Suma ";
+            case "Subtracting":
+                return "Resta ";
+            case "multiplication":
+                return "multiplicación ";
+            case "Dividing":
+                return "Divvisión ";
+            case "Calculating the modulus of ":
+                return "EL modulo de ";
+            case "Calculating the logarithm of":
+                return "El logartimo de ";
+            case "Raising":
+                return "La potencia de ";
+            case "Calculating the square root of":
+                return "La raiz cuadrada de ";
+            case "result":
+                return "La operación es: ";
+            default:
+                return "Mensaje no encontrado";
+        }
     }
 }

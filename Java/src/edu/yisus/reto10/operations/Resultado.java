@@ -1,39 +1,47 @@
 package edu.yisus.reto10.operations;
+import edu.yisus.reto10.Idiomas.LanguageFactory;
 
-/**
- * CLASE RESULTADO QUE REPRESENTA EL RESULTADO DE UNA OPERACIÓN ARITMETICA.
- */
 public class Resultado {
-    private String operacion;
+    private OperacionAritmetica operacion;
+    private double num1;
+    private double num2;
 
-    private double resultado;
-
-    /**
-     * CONSTRUCTOR DE LA CLASE RESULTADO QUE RECIBE UNA INSTANCIA DE OPERACIONARITMETICA, ASÍ COMO DOS NÚMEROS PARA REALIZAR LA OPERACIÓN.
-     */
     public Resultado(OperacionAritmetica op, double num1, double num2) {
-        this.operacion = obtenerMensaje(op, num1, num2);
-        this.resultado = op.operacion(num1, num2);
+        this.operacion = op;
+        this.num1 = num1;
+        this.num2 = num2;
     }
 
-    /**
-     * MÉTODO PARA OBTENER LA DESCRIPCIÓN DE LA OPERACIÓN REALIZADA.
-     */
-    public String getOperacion() {
-        return operacion;
+    public double obtenerResultado() {
+        return operacion.operacion(num1, num2);
     }
 
-    /**
-     * MÉTODO PARA OBTENER EL VALOR RESULTANTE DE LA OPERACIÓN
-     */
-    public double getResultado() {
-        return resultado;
+    public String obtenerMensaje() {
+        String simbolo = operacion.getSimbolo();
+        String operacionStr = obtenerDescripcionOperacion(simbolo);
+        return operacionStr + " " + num1 + " " + simbolo + " " + num2 + LanguageFactory.getMessage("is") + obtenerResultado();
     }
 
-    /**
-     * MÉTODO ESTÁTICO QUE GENERA UN MENSAJE DESCRIPTIVO DE LA OPERACIÓN REALIZADA.
-     */
-    public String obtenerMensaje(OperacionAritmetica op, double num1, double num2) {
-        return op.getClass().getSimpleName() + ": " + num1 + " " + op.getSimbolo() + " " + num2 + " es = " + op.operacion(num1,num2);
+    private String obtenerDescripcionOperacion(String simbolo) {
+        switch (simbolo) {
+            case "+":
+                return LanguageFactory.getMessage("Adding");
+            case "-":
+                return LanguageFactory.getMessage("Subtracting");
+            case "*":
+                return LanguageFactory.getMessage("multiplication");
+            case "/":
+                return LanguageFactory.getMessage("Dividing");
+            case "%":
+                return LanguageFactory.getMessage("Calculating the modulus of");
+            case "log":
+                return LanguageFactory.getMessage("Calculating the logarithm of: ");
+            case "^":
+                return LanguageFactory.getMessage("Raising");
+            case "sqrt":
+                return LanguageFactory.getMessage("Calculating the square root of: ");
+            default:
+                return "Realizando operación";
+        }
     }
 }

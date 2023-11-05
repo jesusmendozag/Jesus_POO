@@ -13,11 +13,17 @@ public class RaizCuadrada extends Multiplicacion {
      */
     @Override
     public double operacion(double num1, double num2) {
-        double resultado = 0.5;
-        for (int i = 0; i < num2; i++) {
-            resultado = super.operacion(resultado,num2);
+        double base = 1;
+        double resultado = 0;
+        while (true) {
+            resultado = super.operacion(base,num2);
+            if (resultado > num1) {
+                base--;
+                break;
+            }
+            base++;
         }
-        return resultado;
+        return base;
     }
 
     /**
