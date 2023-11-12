@@ -66,6 +66,10 @@ public class Inglés implements Language{
                 return "Calculating the square root of ";
             case "result":
                 return "the operation is: ";
+            case "ask_txt":
+                return "Do you want to see the arithmetic operations performed so far? (s/n): ";
+            case "show_operations":
+                return "Showing operations carried out...";
             default:
                 return "Message not found";
         }

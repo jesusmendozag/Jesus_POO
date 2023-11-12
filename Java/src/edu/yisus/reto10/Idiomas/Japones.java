@@ -66,6 +66,10 @@ public class Japones implements Language{
                 return "平方根 ";
             case "result":
                 return "操作は: ";
+            case "ask_txt":
+                return "これまでに実行された算術演算を確認しますか? (s/n): ";
+            case "show_operations":
+                return "実行された操作の表示...";
             default:
                 return "メッセージが見つかりません";
         }

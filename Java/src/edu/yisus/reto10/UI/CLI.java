@@ -29,6 +29,13 @@ public class CLI {
 
         LanguageFactory.selectLanguage(idiomaSeleccionado);
 
+        System.out.print(LanguageFactory.getMessage("ask_txt"));
+        char verOperaciones = scanner.next().charAt(0);
+
+        if (verOperaciones == 's'){
+
+        }
+
         do {
             System.out.println(LanguageFactory.getMessage("welcome"));
             System.out.println(LanguageFactory.getMessage("menu"));
@@ -115,7 +122,12 @@ public class CLI {
             System.out.println(resultado.obtenerResultado());
             System.out.println(LanguageFactory.getMessage("result") + resultado.obtenerMensaje());
 
-            resultado = new Resultado(operacion, num1, num2);
+            System.out.print(LanguageFactory.getMessage("ask_txt"));
+            verOperaciones = scanner.next().charAt(0);
+
+            if (verOperaciones == 's') {
+                System.out.println(LanguageFactory.getMessage("show_operations"));
+            }
 
             System.out.print(LanguageFactory.getMessage("continue"));
             continuar = scanner.next().charAt(0);

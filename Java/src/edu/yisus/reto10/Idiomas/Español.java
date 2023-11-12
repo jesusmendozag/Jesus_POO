@@ -67,6 +67,10 @@ public class Español implements Language{
                 return "La raiz cuadrada de ";
             case "result":
                 return "La operación es: ";
+            case "ask_txt":
+                return "\"¿Desea ver las operaciones aritméticas realizadas hasta ahora? (s/n): \": ";
+            case "show_operations":
+                return "Mostrando operaciones realizadas...";
             default:
                 return "Mensaje no encontrado";
         }

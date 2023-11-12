@@ -1,6 +1,14 @@
 package edu.yisus.reto10.operations;
 import edu.yisus.reto10.Idiomas.LanguageFactory;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
+
 public class Resultado {
     private OperacionAritmetica operacion;
     private double num1;
@@ -19,7 +27,18 @@ public class Resultado {
     public String obtenerMensaje() {
         String simbolo = operacion.getSimbolo();
         String operacionStr = obtenerDescripcionOperacion(simbolo);
-        return operacionStr + " " + num1 + " " + simbolo + " " + num2 + LanguageFactory.getMessage("is") + obtenerResultado();
+        String mensaje = String.format("%s, %s, %s, %s, %s, %s", operacionStr, num1, simbolo, num2, LanguageFactory.getMessage("is"), obtenerResultado());
+
+        Path path = Paths.get("Operaciones.txt");
+
+        try {
+            Files.write(path, mensaje.getBytes(), StandardOpenOption.APPEND, StandardOpenOption.CREATE);
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return mensaje;
     }
 
     private String obtenerDescripcionOperacion(String simbolo) {
