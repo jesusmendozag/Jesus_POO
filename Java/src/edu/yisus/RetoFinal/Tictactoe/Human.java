@@ -1,6 +1,5 @@
 package edu.yisus.RetoFinal.Tictactoe;
 import edu.yisus.RetoFinal.UI.Languages.LanguagesFactory;
-
 import java.util.Scanner;
 
 public class Human extends Player {

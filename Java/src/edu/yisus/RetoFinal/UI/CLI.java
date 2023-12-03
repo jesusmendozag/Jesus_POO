@@ -53,8 +53,8 @@ public class CLI {
                     playerVsPlayer();
                     break;
                 case 3:
-                    scoreBoard.printScores();
-                    scoreBoard.saveScoresToFile("score.txt");
+                    scoreBoard.displayRankings();
+                    scoreBoard.saveScoresToFile();
                     break;
                 case 4:
                     System.out.println(LanguagesFactory.getMessage("exit"));

@@ -30,7 +30,11 @@ public class Japanese implements Languages {
             case "error_score":
                 return "スコアの保存中にエラーが発生しました。";
             case "replay":
-                return "また遊びたいですか? (y/n): ";
+                return "また遊びたいですか? (s/n): ";
+            case "you_have":
+                return " あなたが持っている ";
+            case "points":
+                return " ポイント ";
             default:
                 return "メッセージが見つかりません";
         }

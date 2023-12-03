@@ -1,35 +1,34 @@
 package edu.yisus.RetoFinal.Tictactoe;
-import edu.yisus.RetoFinal.UI.Languages.LanguagesFactory;
-
 import java.io.*;
 import java.util.*;
 
 public class ScoreBoard {
-    private static final String SCORES_FILE = "score.txt";
-    private Map<String, Integer> scores;
+    private static final String SCORES_FILE = "scores.txt";
+    private List<Player> players;
 
     public ScoreBoard() {
-        scores = new HashMap<>();
+        players = new ArrayList<>();
         loadScoresFromFile();
     }
 
-    public void addScore(String playerName, int score) {
-        scores.put(playerName, scores.getOrDefault(playerName, 0) + score);
+    public void updateScore(Player player) {
+        if (!players.contains(player)) {
+            players.add(player);
+        }
     }
 
-    public void printScores() {
-        scores.entrySet().stream()
-                .sorted(Map.Entry.<String, Integer>comparingByValue().reversed())
-                .forEach(entry -> System.out.println(entry.getKey() + ": " + entry.getValue()));
+    public List<Player> getRankedPlayers() {
+        players.sort(Comparator.comparingInt(Player::getScore).reversed());
+        return players;
     }
 
-    public void saveScoresToFile(String fileName) {
-        try (PrintWriter writer = new PrintWriter(new File(fileName))) {
-            scores.entrySet().stream()
-                    .sorted(Map.Entry.<String, Integer>comparingByValue().reversed())
-                    .forEach(entry -> writer.println(entry.getKey() + ": " + entry.getValue()));
-        } catch (FileNotFoundException e) {
-            System.out.println(LanguagesFactory.getMessage("error:score") + e.getMessage());
+    public void saveScoresToFile() {
+        try (PrintWriter writer = new PrintWriter(new FileWriter(SCORES_FILE))) {
+            for (Player player : players) {
+                writer.println(player.getName() + ": " + player.getScore());
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
@@ -40,13 +39,26 @@ public class ScoreBoard {
                 String[] parts = line.split(": ");
                 if (parts.length == 2) {
                     String playerName = parts[0];
-                    int score = Integer.parseInt(parts[1]); // Obtener puntaje como entero
-                    scores.put(playerName, score); // Agregar puntaje al mapa
+                    int score = Integer.parseInt(parts[1]);
+                    Player player = new GenericPlayer("-");
+                    player.setName(playerName);
+                    player.setScore(score);
+                    players.add(player);
                 }
             }
         } catch (IOException | NumberFormatException e) {
-            // Manejar excepciones según sea necesario
             e.printStackTrace();
+        }
+    }
+
+    public void displayRankings() {
+        List<Player> rankedPlayers = getRankedPlayers();
+        System.out.println("Rankings:");
+        for (int i = 0; i < rankedPlayers.size(); i++) {
+            Player player = rankedPlayers.get(i);
+            if (!player.getName().equals("Computadora")) {
+                System.out.println((i + 1) + ": " + player.getName());
+            }
         }
     }
 }

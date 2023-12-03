@@ -1,6 +1,7 @@
 package edu.yisus.RetoFinal.Tictactoe;
 import edu.yisus.RetoFinal.UI.Languages.Languages;
 import edu.yisus.RetoFinal.UI.Languages.LanguagesFactory;
+import java.util.Scanner;
 
 public class Game {
     private Player player1;
@@ -8,15 +9,18 @@ public class Game {
     private Player currentPlayer;
     private Board board;
     private ScoreBoard scoreBoard;
+    private Scanner scanner;
 
     public Game(Languages language, ScoreBoard scoreBoard) {
         this.board = new Board();
         this.scoreBoard = new ScoreBoard();
+        this.scanner = new Scanner(System.in);
     }
 
     public void playerVsComputer() {
         player1 = new Human("X");
         player2 = new IAplayer("O");
+        player2.setName("Computadora");
         playGame();
     }
 
@@ -41,22 +45,23 @@ public class Game {
             board.makeMove(move, currentPlayer.getSymbol());
 
             if (board.checkForWinner()) {
-                board.displayBoard();
-                System.out.println(currentPlayer.getName() + " " + LanguagesFactory.getMessage("win"));
-                scoreBoard.addScore(currentPlayer.getName(), 1);
+                currentPlayer.setScore(currentPlayer.getScore() + 1);
+                scoreBoard.updateScore(currentPlayer);
+                System.out.println(currentPlayer.getName() + LanguagesFactory.getMessage("you_have") + currentPlayer.getScore() + LanguagesFactory.getMessage("points"));
                 return;
             }
 
             if (board.isBoardFull()) {
-                board.displayBoard();
                 System.out.println(LanguagesFactory.getMessage("tie"));
+                System.out.println(player1.getName() + LanguagesFactory.getMessage("you_have") + player1.getScore() + LanguagesFactory.getMessage("points"));
+                System.out.println(player2.getName() + LanguagesFactory.getMessage("you_have") + player2.getScore() + LanguagesFactory.getMessage("points"));
                 return;
             }
 
-            scoreBoard.addScore(player1.getName(), 1);
-            scoreBoard.addScore(player1.getName(), 1);
+            scoreBoard.updateScore(player1);
+            scoreBoard.updateScore(player2);
 
-            scoreBoard.printScores();
+            scoreBoard.displayRankings();
 
             currentPlayer = (currentPlayer == player1) ? player2 : player1;
         }

@@ -29,7 +29,11 @@ public class English implements Languages {
             case "error_score":
                 return "An error occurred while saving scores.";
             case "replay":
-                return "Do you want to play again? (y/n): ";
+                return "Do you want to play again? (s/n): ";
+            case "you_have":
+                return " you have ";
+            case "points":
+                return " points";
             default:
                 return "Message not found";
         }

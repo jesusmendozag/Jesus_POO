@@ -30,7 +30,11 @@ public class Spanish implements Languages {
             case "error_score":
                 return "Ocurrió un error al guardar los puntajes.";
             case "replay":
-                return "Quieres volver a intentarlo? (y/n): ";
+                return "Quieres volver a intentarlo? (s/n): ";
+            case "you_have":
+                return " tu tienes ";
+            case "points":
+                return " puntos";
             default:
                 return "Mensaje no encontrado";
         }
