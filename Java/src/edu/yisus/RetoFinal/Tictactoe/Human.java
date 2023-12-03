@@ -19,4 +19,3 @@ public class Human extends Player {
         return scanner.nextInt();
     }
 }
-
