@@ -1,4 +1,4 @@
-package edu.yisus.RetoFinal.Languages;
+package edu.yisus.RetoFinal.UI.Languages;
 
 public class LanguagesFactory {
     private static Languages language;
@@ -15,8 +15,8 @@ public class LanguagesFactory {
                 language = new Japanese();
                 break;
             default:
-                System.out.println(". Seleccionando español por defecto.");
-                language = new Spanish();
+                System.out.println("Invalid choice. Defaulting to English.");
+                language = new English();
         }
     }
     /**
@@ -28,6 +28,6 @@ public class LanguagesFactory {
         if (language != null) {
             return language.getMessage(key);
         }
-        return "Idioma no configurado";
+        return "Language not configured";
     }
 }

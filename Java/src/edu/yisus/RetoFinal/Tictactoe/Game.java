@@ -1,59 +1,32 @@
 package edu.yisus.RetoFinal.Tictactoe;
-import edu.yisus.RetoFinal.Languages.Languages;
-import java.util.Scanner;
-
+import edu.yisus.RetoFinal.UI.Languages.Languages;
+import edu.yisus.RetoFinal.UI.Languages.LanguagesFactory;
 
 public class Game {
     private Player player1;
     private Player player2;
     private Player currentPlayer;
     private Board board;
-    private Languages language;
+    private ScoreBoard scoreBoard;
 
-    public Game(Languages language) {
-        this.language = language;
+    public Game(Languages language, ScoreBoard scoreBoard) {
         this.board = new Board();
+        this.scoreBoard = new ScoreBoard();
     }
 
-    public void startGame() {
-        System.out.println(language.getTranslation("menu.playAgainstComputer"));
-        System.out.println(language.getTranslation("menu.playAgainstPlayer"));
-        System.out.println(language.getTranslation("menu.quit"));
-
-        System.out.print(language.getTranslation("prompt.enterChoice"));
-        Scanner scanner = new Scanner(System.in);
-        int choice = scanner.nextInt();
-
-        switch (choice) {
-            case 1:
-                playerVsComputer();
-                break;
-            case 2:
-                playerVsPlayer();
-                break;
-            case 3:
-                System.out.println("Quitting the game. Goodbye!");
-                System.exit(0);
-                break;
-            default:
-                System.out.println("Invalid choice. Exiting the game.");
-                System.exit(0);
-        }
-    }
-
-    private void playerVsComputer() {
+    public void playerVsComputer() {
         player1 = new Human("X");
         player2 = new IAplayer("O");
         playGame();
     }
 
-    private void playerVsPlayer() {
+    public void playerVsPlayer() {
         player1 = new Human("X");
         player2 = new Human("O");
         playGame();
     }
 
-    private void playGame() {
+    public void playGame() {
         currentPlayer = player1;
 
         while (!board.isGameOver()) {
@@ -61,7 +34,7 @@ public class Game {
             int move = currentPlayer.makeMove();
 
             if (!board.isMoveValid(move)) {
-                System.out.println("Invalid move. Try again.");
+                System.out.println(LanguagesFactory.getMessage("invalid_move"));
                 continue;
             }
 
@@ -69,17 +42,24 @@ public class Game {
 
             if (board.checkForWinner()) {
                 board.displayBoard();
-                System.out.println("Player " + currentPlayer.getSymbol() + " wins!");
+                System.out.println(currentPlayer.getName() + " " + LanguagesFactory.getMessage("win"));
+                scoreBoard.addScore(currentPlayer.getName(), 1);
                 return;
             }
 
             if (board.isBoardFull()) {
                 board.displayBoard();
-                System.out.println("The game is a tie!");
+                System.out.println(LanguagesFactory.getMessage("tie"));
                 return;
             }
+
+            scoreBoard.addScore(player1.getName(), 1);
+            scoreBoard.addScore(player1.getName(), 1);
+
+            scoreBoard.printScores();
 
             currentPlayer = (currentPlayer == player1) ? player2 : player1;
         }
     }
+
 }

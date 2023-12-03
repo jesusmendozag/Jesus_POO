@@ -1,4 +1,4 @@
-package edu.yisus.RetoFinal.Languages;
+package edu.yisus.RetoFinal.UI.Languages;
 
 public interface Languages {
     String getMessage(String key);
