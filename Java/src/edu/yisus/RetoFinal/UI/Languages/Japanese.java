@@ -35,6 +35,8 @@ public class Japanese implements Languages {
                 return " あなたが持っている ";
             case "points":
                 return " ポイント ";
+            case "error":
+                return "番号を選択してください";
             default:
                 return "メッセージが見つかりません";
         }

@@ -34,6 +34,8 @@ public class English implements Languages {
                 return " you have ";
             case "points":
                 return " points";
+            case "error":
+                return "Choice a number please";
             default:
                 return "Message not found";
         }

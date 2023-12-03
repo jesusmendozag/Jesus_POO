@@ -2,6 +2,8 @@ package edu.yisus.RetoFinal.UI;
 import edu.yisus.RetoFinal.UI.Languages.*;
 import edu.yisus.RetoFinal.Tictactoe.Game;
 import edu.yisus.RetoFinal.Tictactoe.ScoreBoard;
+
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /**
@@ -28,44 +30,50 @@ public class CLI {
         System.out.println("2. Español");
         System.out.println("3. 日本語 ");
 
-        int idiomaSeleccionado = scanner.nextInt();
+        try {
+            int idiomaSeleccionado = scanner.nextInt();
 
-        /**
-         * CONFIGURACIÓN PARA PODER CAMBIAR LOS MENSAJES AL IDIOMA SELECCIONADO.
-         */
+            /**
+             * CONFIGURACIÓN PARA PODER CAMBIAR LOS MENSAJES AL IDIOMA SELECCIONADO.
+             */
+            LanguagesFactory.selectLanguage(idiomaSeleccionado);
 
-        LanguagesFactory.selectLanguage(idiomaSeleccionado);
+        }catch (InputMismatchException e) {
+            System.out.println(LanguagesFactory.getMessage("error_choice"));
+            scanner.next();
+        }
 
         do {
             System.out.println(LanguagesFactory.getMessage("welcome"));
             System.out.println(LanguagesFactory.getMessage("menu"));
             System.out.println(LanguagesFactory.getMessage("select_option"));
 
-            int opcion = scanner.nextInt();
+            try{
+                int opcion = scanner.nextInt();
 
-            if (opcion == 0) {
-                break;
-            }
+                if (opcion < 1 || opcion > 4) {
+                    System.out.println(LanguagesFactory.getMessage("error_choice"));
+                    continue;
+                }
 
-            if (opcion < 1 || opcion > 4) {
+                switch (opcion) {
+                    case 1:
+                        playerVsComputer();
+                        break;
+                    case 2:
+                        playerVsPlayer();
+                        break;
+                    case 3:
+                        scoreBoard.displayRankings();
+                        scoreBoard.saveScoresToFile();
+                        break;
+                    case 4:
+                        System.out.println(LanguagesFactory.getMessage("exit"));
+                        return;
+                }
+            }catch (InputMismatchException e){
                 System.out.println(LanguagesFactory.getMessage("error_choice"));
-                continue;
-            }
-
-            switch (opcion) {
-                case 1:
-                    playerVsComputer();
-                    break;
-                case 2:
-                    playerVsPlayer();
-                    break;
-                case 3:
-                    scoreBoard.displayRankings();
-                    scoreBoard.saveScoresToFile();
-                    break;
-                case 4:
-                    System.out.println(LanguagesFactory.getMessage("exit"));
-                    return;
+                scanner.next();
             }
         } while (true);
 

@@ -35,6 +35,8 @@ public class Spanish implements Languages {
                 return " tu tienes ";
             case "points":
                 return " puntos";
+            case "error":
+                return "Elige un número por favor";
             default:
                 return "Mensaje no encontrado";
         }
