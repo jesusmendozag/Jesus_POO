@@ -3,6 +3,10 @@ package edu.yisus.RetoFinal.UI.Languages;
 public class LanguagesFactory {
     private static Languages language;
 
+    /**
+     * SELECCIONA EL IDIOMA SEGÚN LA OPCIÓN PROPORCIONADA.
+     * @param languageOption La opción que representa el idioma deseado.
+     */
     public static void selectLanguage(int languageOption){
         switch (languageOption){
             case 1:

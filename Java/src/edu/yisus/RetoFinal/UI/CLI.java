@@ -4,10 +4,17 @@ import edu.yisus.RetoFinal.Tictactoe.Game;
 import edu.yisus.RetoFinal.Tictactoe.ScoreBoard;
 import java.util.Scanner;
 
+/**
+ * LA CLASE `CLI` REPRESENTA LA INTERFAZ DE LÍNEA DE COMANDOS (CLI) PARA INTERACTUAR CON EL JUEGO DE TRES EN LÍNEA.
+ * PERMITE SELECCIONAR UN IDIOMA, ACCEDER A DIFERENTES OPCIONES DE JUEGO Y VISUALIZAR LOS RANKINGS DE JUGADORES.
+ */
 public class CLI {
     private static Languages language;
     private static ScoreBoard scoreBoard = new ScoreBoard();
 
+    /**
+     * MÉTODO PRINCIPAL QUE MUESTRA EL MENÚ PRINCIPAL Y FACILITA LA INTERACCIÓN CON EL JUEGO.
+     */
     public static void menu() {
         Scanner scanner = new Scanner(System.in);
         char continuar = 's';
@@ -64,6 +71,9 @@ public class CLI {
 
     }
 
+    /**
+     * INICIA UNA PARTIDA ENTRE DOS JUGADORES HUMANOS.
+     */
     private static void playerVsPlayer() {
         Scanner scanner = new Scanner(System.in);
         char replay;
@@ -76,6 +86,9 @@ public class CLI {
         } while (replay == 's' || replay == 'S');
     }
 
+    /**
+     * INICIA UNA PARTIDA DONDE UN JUGADOR HUMANO ENFRENTA A LA COMPUTADORA.
+     */
     private static void playerVsComputer() {
         Scanner scanner = new Scanner(System.in);
         char replay;

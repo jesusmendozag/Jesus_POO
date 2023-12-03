@@ -3,6 +3,10 @@ import edu.yisus.RetoFinal.UI.Languages.Languages;
 import edu.yisus.RetoFinal.UI.Languages.LanguagesFactory;
 import java.util.Scanner;
 
+/**
+ * LA CLASE `Game` REPRESENTA UN JUEGO DE TRES EN LÍNEA (TA-TE-TI).
+ * INCLUYE MÉTODOS PARA JUGAR CONTRA LA COMPUTADORA O ENTRE DOS JUGADORES HUMANOS.
+ */
 public class Game {
     private Player player1;
     private Player player2;
@@ -11,12 +15,21 @@ public class Game {
     private ScoreBoard scoreBoard;
     private Scanner scanner;
 
+    /**
+     * CONSTRUYE UN NUEVO OBJETO `Game` PARA UN JUEGO DE TRES EN LÍNEA.
+     * @param language   El idioma del juego (actualmente no utilizado).
+     * @param scoreBoard El marcador de puntuación para llevar registro de los puntos de los jugadores.
+     */
     public Game(Languages language, ScoreBoard scoreBoard) {
         this.board = new Board();
         this.scoreBoard = new ScoreBoard();
         this.scanner = new Scanner(System.in);
     }
 
+    /**
+     * INICIA UNA PARTIDA EN LA QUE UN JUGADOR HUMANO ENFRENTA A LA COMPUTADORA.
+     * EL JUGADOR HUMANO USA 'X' Y LA COMPUTADORA USA 'O'.
+     */
     public void playerVsComputer() {
         player1 = new Human("X");
         player2 = new IAplayer("O");
@@ -24,12 +37,19 @@ public class Game {
         playGame();
     }
 
+    /**
+     * INICIA UNA PARTIDA EN LA QUE DOS JUGADORES HUMANOS COMPITEN ENTRE SÍ.
+     * EL PRIMER JUGADOR USA 'X' Y EL SEGUNDO JUGADOR USA 'O'.
+     */
     public void playerVsPlayer() {
         player1 = new Human("X");
         player2 = new Human("O");
         playGame();
     }
 
+    /**
+     * INICIA LA PARTIDA, GESTIONANDO LOS TURNOS Y CONTROLANDO EL DESARROLLO DEL JUEGO.
+     */
     public void playGame() {
         currentPlayer = player1;
 
@@ -66,5 +86,4 @@ public class Game {
             currentPlayer = (currentPlayer == player1) ? player2 : player1;
         }
     }
-
 }
