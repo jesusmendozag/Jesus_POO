@@ -39,7 +39,7 @@ public class CLI {
             LanguagesFactory.selectLanguage(idiomaSeleccionado);
 
         }catch (InputMismatchException e) {
-            System.out.println(LanguagesFactory.getMessage("error_choice"));
+            System.out.println(LanguagesFactory.getMessage("error"));
             scanner.next();
         }
 
@@ -72,7 +72,7 @@ public class CLI {
                         return;
                 }
             }catch (InputMismatchException e){
-                System.out.println(LanguagesFactory.getMessage("error_choice"));
+                System.out.println(LanguagesFactory.getMessage("error"));
                 scanner.next();
             }
         } while (true);
