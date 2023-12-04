@@ -72,7 +72,7 @@ public class CLI {
                         return;
                 }
             }catch (InputMismatchException e){
-                System.out.println(LanguagesFactory.getMessage("error"));
+                System.out.println(LanguagesFactory.getMessage("error_choice"));
                 scanner.next();
             }
         } while (true);

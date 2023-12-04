@@ -78,12 +78,35 @@ public class ScoreBoard {
      */
     public void displayRankings() {
         List<Player> rankedPlayers = getRankedPlayers();
+        System.out.println("Total de jugadores: " + rankedPlayers.size());
         System.out.println("Rankings:");
         for (int i = 0; i < rankedPlayers.size(); i++) {
             Player player = rankedPlayers.get(i);
             if (!player.getName().equals("Computadora")) {
-                System.out.println((i + 1) + ": " + player.getName());
+                System.out.println((i + 1) + ": " + player.getName() + " con " + player.getScore() + " puntos");
             }
         }
+    }
+
+    /**
+     * Busca un jugador por su nombre.
+     * @param name El nombre del jugador a buscar.
+     * @return El jugador si se encuentra, o null si no se encuentra.
+     */
+    public Player findPlayerByName(String name) {
+        for (Player player : players) {
+            if (player.getName().equals(name)) {
+                return player;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Agrega un jugador al tablero de puntuaciones.
+     * @param player El jugador a agregar.
+     */
+    public void addPlayer(Player player) {
+        players.add(player);
     }
 }

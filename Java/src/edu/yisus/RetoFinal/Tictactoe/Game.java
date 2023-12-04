@@ -31,9 +31,17 @@ public class Game {
      * EL JUGADOR HUMANO USA 'X' Y LA COMPUTADORA USA 'O'.
      */
     public void playerVsComputer() {
-        player1 = new Human("X");
-        player2 = new IAplayer("O");
-        player2.setName("Computadora");
+        player1 = scoreBoard.findPlayerByName("nombre del jugador");
+        if (player1 == null) {
+            player1 = new Human("X");
+            scoreBoard.addPlayer(player1);
+        }
+        player2 = scoreBoard.findPlayerByName("Computadora");
+        if (player2 == null) {
+            player2 = new IAplayer("O");
+            player2.setName("Computadora");
+            scoreBoard.addPlayer(player2);
+        }
         playGame();
     }
 
